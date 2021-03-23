@@ -18,7 +18,10 @@ class Branch:
     self._op = op
     self._addr = addr
     self._target = target
+    # branch stats
     self._count = 0
+    self._t = 0
+    self._nt = 0
 
   @property
   def op(self):
@@ -50,8 +53,19 @@ class Branch:
   def count(self):
     return self._count
 
-  def inc(self):
+  def taken(self):
+    return self._t
+
+  def not_taken(self):
+    return self._nt
+
+  def take(self):
     self._count += 1
+    self._t += 1
+
+  def notake(self):
+    self._count += 1
+    self._nt += 1
 
   @staticmethod
   def process_asm_dump(asm_dump):
