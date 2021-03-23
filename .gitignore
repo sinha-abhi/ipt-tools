@@ -1,0 +1,11 @@
+*.swp
+__pycache__
+
+test*.c
+perf.data*
+a.out
+perf-script.py
+m*
+
+
+
