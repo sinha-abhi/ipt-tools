@@ -15,7 +15,7 @@ sys.path.append(os.environ['PERF_EXEC_PATH'] + \
 from perf_trace_context import *
 from Core import *
 
-from iptba.branch import Branch 
+from branch import Branch 
 
 
 branches = None
