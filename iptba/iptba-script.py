@@ -34,8 +34,10 @@ def trace_begin():
 
 
 def process_event(params_dict):
-  for k, v in params_dict.items():
-    print(k, v)
+  # TODO: implement
+  # keys: ev_name attr sample raw_buf comm dso symbol callchain brstack brstacksym iregs uregs
+  for k in params_dict:
+    print(k)
   exit(0)
   
 
