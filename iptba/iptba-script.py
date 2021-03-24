@@ -20,7 +20,6 @@ from branch import Branch
 
 branches = None
 
-
 def trace_begin():
   if len(sys.argv) < 2:
     print("Usage: perf script --itrace=i1ns -s iptba.py <command>")
