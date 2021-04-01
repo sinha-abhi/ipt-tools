@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import re
 
 # see x86_64 instruction set
 cond_branch_ops = [
@@ -125,7 +124,15 @@ class BranchInfo:
     return ret
 
 
-def process_asm_dump(asm_dump):
+def search_binary(binary):
+  import os
+  import re
+
+  print('Warning: executable must be compiled with \'-no-pie\' enabled, ' + \
+        'otherwise branch info will (probably) be wrong')
+  objdump = 'objdump -d ' + binary
+  print("Searching for branch instructions from \'" + objdump + "\'...")
+  asm_dump = os.popen(objdump)
   branches = {}
   for line in asm_dump:
     # FIXME: hard code line length is kinda dumb
@@ -139,5 +146,7 @@ def process_asm_dump(asm_dump):
     if op in cond_branch_ops:
       target = int(ops[1], 16) # target address
       branches[addr] = Branch(op, addr, target)
+  asm_dump.close()
+  print("Found %d conditional branches" % len(branches))
   return branches
 

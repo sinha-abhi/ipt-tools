@@ -13,21 +13,16 @@ sys.path.append(os.environ['PERF_EXEC_PATH'] + \
 from perf_trace_context import *
 from Core import *
 
-from branch import Branch, BranchInfo, process_asm_dump
+from branch import Branch, BranchInfo, search_binary
 
 
 def trace_begin():
   if len(sys.argv) < 2:
-    print("Usage: perf script --itrace=i1ns -s iptba.py <command>")
+    print('Usage: perf script --itrace=i1ns -s iptba.py <command>')
     exit(0)
 
 
-objdump = "objdump -d " + sys.argv[1]
-print("Searching for branch instructions from \'" + objdump + "\'...")
-asm_dump = os.popen(objdump)
-branches = process_asm_dump(asm_dump)
-print("Found %d conditional branches" % len(branches))
-
+branches = search_binary(sys.argv[1])
 binfo = BranchInfo(branches)
 prev_branch_addr = 0
 
