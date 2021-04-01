@@ -1,5 +1,6 @@
 .*.swp
 __pycache__
 
-misc
-perf.data
+perf.data*
+*test*.c
+a.out
