@@ -17,18 +17,17 @@ from branch import Branch, BranchInfo, search_binary
 
 
 def trace_begin():
-  if len(sys.argv) < 2:
-    print('Usage: perf script --itrace=i1ns -s iptba.py <command>')
-    exit(0)
+  pass
 
-
+if len(sys.argv) < 2:
+  print('Usage: perf script --itrace=i1ns -s iptba.py <command>')
+  exit(0)
 branches = search_binary(sys.argv[1])
 binfo = BranchInfo(branches)
 prev_branch_addr = 0
 
 def process_event(params_dict):
   global prev_branch_addr
-  global ic
   sample = params_dict['sample']
   addr = sample['ip']
   t = sample['time']
@@ -48,6 +47,9 @@ def process_event(params_dict):
 
 
 def trace_end():
-  print('Done processing trace')
-  print(binfo)
+  print('Plotting results')
+  for branch in binfo.branches():
+    if branch.count() >= 100:
+      print('\tPlotting branch', branch.op, str(branch.addr))
+      branch.plot()
 

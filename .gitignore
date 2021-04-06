@@ -2,5 +2,10 @@
 __pycache__
 
 perf.data*
-*test*.c
 a.out
+*.png
+
+traces/
+*.c
+
+runspec.py

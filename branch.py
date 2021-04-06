@@ -72,6 +72,20 @@ class Branch:
     self.nt += 1
     self._order.append(False)
 
+  def plot(self):
+    import matplotlib.pyplot as plt
+    import matplotlib.ticker as tk
+
+    fig, ax = plt.subplots()
+    ax.plot(range(self._count), self._order, '.', color='red')
+    ax.set_xlabel('Num Executions')
+    ax.set_ylabel('TNT')
+    ax.title.set_text(self.op + ' 0x' + str(self._addr))
+    ax.yaxis.set_major_locator(tk.FixedLocator([0, 1]))
+    ax.set_yticklabels(['NT', 'T'])
+    ax.set_ylim(-0.1, 1.1)
+    fig.savefig(self.op + '-0x' + str(self._addr) + '.png')
+
   def __repr__(self):
     return 'Branch [op: ' + self._op + ', addr: ' + hex(self._addr) + \
            ', target: ' + hex(self._target) + \
@@ -93,10 +107,13 @@ class BranchInfo:
   def __init__(self, branches):
     self._start = -1
     self._stop = -1
-    self.branches = branches
+    self._branches = branches
 
   def branch(self, addr):
-    return self.branches.get(addr)
+    return self._branches.get(addr)
+
+  def branches(self):
+    return self._branches.values()
 
   @property
   def start(self):
