@@ -47,9 +47,10 @@ def process_event(params_dict):
 
 
 def trace_end():
-  print('Plotting results')
+  n = 100
+  print('Plotting data for branches encountered', n, 'times')
   for branch in binfo.branches():
-    if branch.count() >= 100:
+    if branch.count() >= n:
       print('\tPlotting branch', branch.op, str(branch.addr))
       branch.plot()
 

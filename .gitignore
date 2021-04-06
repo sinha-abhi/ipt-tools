@@ -1,10 +1,11 @@
 .*.swp
 __pycache__
 
-perf.data*
+perf.data
 a.out
 *.png
 
+data/
 traces/
 *.c
 

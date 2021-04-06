@@ -75,16 +75,20 @@ class Branch:
   def plot(self):
     import matplotlib.pyplot as plt
     import matplotlib.ticker as tk
+    import os
 
+    title = self.op + ' 0x' + str(self._addr)
     fig, ax = plt.subplots()
-    ax.plot(range(self._count), self._order, '.', color='red')
-    ax.set_xlabel('Num Executions')
-    ax.set_ylabel('TNT')
-    ax.title.set_text(self.op + ' 0x' + str(self._addr))
+    ax.plot(range(self._count), self._order, '-', color='red')
+    ax.set_xlabel('Num Executions: ' + str(self._count))
+    ax.set_ylabel('Taken: ' + str(self.t) + ', Not taken: ' + str(self.nt))
+    ax.title.set_text(title)
     ax.yaxis.set_major_locator(tk.FixedLocator([0, 1]))
     ax.set_yticklabels(['NT', 'T'])
     ax.set_ylim(-0.1, 1.1)
-    fig.savefig(self.op + '-0x' + str(self._addr) + '.png')
+    if not os.path.exists('data/'):
+      os.makedirs('data/')
+    fig.savefig('data/' + self.op + '-0x' + str(self._addr) + '.png')
 
   def __repr__(self):
     return 'Branch [op: ' + self._op + ', addr: ' + hex(self._addr) + \
@@ -135,8 +139,8 @@ class BranchInfo:
     ret = 'BranchInfo [start: ' + str(self._start) 
     ret += ', stop: '+  str(self._stop)
     ret += ', branches:\n'
-    for a in self.branches:
-      ret += '\t' + str(self.branches[a]) + '\n'
+    for a in self._branches:
+      ret += '\t' + str(self._branches[a]) + '\n'
     ret += ']'
     return ret
 
