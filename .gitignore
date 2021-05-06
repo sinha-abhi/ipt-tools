@@ -1,4 +1,4 @@
-.*.swp
+*.*.swp
 __pycache__
 
 perf.data
@@ -7,6 +7,5 @@ a.out
 
 data/
 traces/
-*.c
 
 runspec.py
