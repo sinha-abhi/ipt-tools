@@ -25,7 +25,6 @@ public:
     order.push_back(false);
   }
 
-  friend std::map<unsigned, Branch> objdump_decode(std::string bf);
   friend std::ostream &operator<<(std::ostream &o, const Branch &b);
 private:
   std::string op;

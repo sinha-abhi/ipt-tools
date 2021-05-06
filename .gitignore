@@ -5,6 +5,7 @@ perf.data
 a.out
 *.png
 
+bin/
 data/
 traces/
 
