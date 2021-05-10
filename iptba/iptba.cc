@@ -87,7 +87,8 @@ std::map<unsigned, Branch> objdump_decode(std::string bf) {
 }
 
 int main() {
-  auto branches = objdump_decode("test/a.out");
+  std::string exe = "test/a.out";
+  auto branches = objdump_decode(exe);
   for (auto &b : branches)
     std::cout << b.first << " " << b.second << std::endl;
 
