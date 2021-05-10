@@ -1,17 +1,28 @@
-iptba
+ipt-tools
 =====
 
-Analyze branch behavior using Intel PT.
+A set of tools to analyze trace data generated from Intel PT.
 
-Commands
---------
-Note that executables need to be compiled with the `-no-pie` flag enabled.
+### iptba
 
-get perf.data using perf-intel-pt: `perf record -e intel_pt//u <command>`
+Analyze conditional branch behavior. 
 
-use iptba: `perf script --itrace=i1ns -s iptba-script.py <command>`
+1. Generate `perf.data` with Intel PT enabled
+```bash
+perf record -e intel_pt//u <command>
+```
 
-TODO
-----
-- [ ] plot behavior of "interesting" branches
-  - [ ] collect data from SPEC cpu2017 benchmark suite
+2. Use `perf script` with provided script
+```bash
+perf script --itrace=i1ns -s iptba-script.py <command>
+```
+
+**NOTE**  Executables need to be compiled with the `-no-pie` flag enabled (in gcc).
+
+### iptdiff -- **WIP**
+
+Compare two trace data of an executable.
+
+### TODO
+- [ ] port `iptba` to C/C++
+- [ ] prototype of `iptdiff`
